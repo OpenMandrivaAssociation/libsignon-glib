@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   libsignon-glib-1.8.tar.gz: 74c2718ea5423747c68b47e52b85a6e273cac085
+sources:
+  libsignon-glib-1.10.tar.gz: 224f66c9662843705da4b35d781a50d6aeb8ca5f
