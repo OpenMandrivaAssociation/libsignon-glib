@@ -1,4 +1,5 @@
 %define api	1.0
+%define Werror_cflags %nil
 %define major	1
 %define libname	%mklibname signon-glib %{major}
 %define girname	%mklibname signon-glib-gir %{api}
@@ -6,14 +7,15 @@
 
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
-Version:	1.10
-Release:	3
+Version:	1.12
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
 Source0:	http://accounts-sso.googlecode.com/files/%{name}-%{version}.tar.gz
 BuildRequires:	python-gi >= 2.90
 BuildRequires:	xsltproc
+BuildRequires:	gtk-doc
 BuildRequires:	pkgconfig(check) >= 0.9.4
 BuildRequires:	pkgconfig(gio-2.0) >= 2.30
 BuildRequires:	pkgconfig(gio-unix-2.0)
@@ -61,9 +63,11 @@ Group:		Development/Python
 Python binding for %{name}.
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}-11033f3e12b73064d9ff2df9ae8e2d3c1883f76e
 
 %build
+sed -i 's!-Werror!!g' libsignon-glib/Makefile.am
+./autogen.sh
 %configure
 make
 
@@ -83,7 +87,6 @@ rm -fr %{buildroot}%{py_platsitedir}/gi/overrides/__pycache__
 %{_libdir}/pkgconfig/%{name}.pc
 %{_includedir}/%{name}
 %{_datadir}/gir-1.0/Signon-%{api}.gir
-%{_datadir}/gtk-doc/html/%{name}
 %{_datadir}/vala/vapi/*
 
 %files -n python-%{name}
