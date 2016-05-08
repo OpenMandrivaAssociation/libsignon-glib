@@ -66,6 +66,7 @@ Python binding for %{name}.
 %setup -qn %{name}-%{version}-11033f3e12b73064d9ff2df9ae8e2d3c1883f76e
 
 %build
+%setup_compile_flags
 sed -i 's!-Werror!!g' libsignon-glib/Makefile.am
 ./autogen.sh
 %configure
