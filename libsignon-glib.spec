@@ -4,6 +4,7 @@
 %define libname	%mklibname signon-glib %{major}
 %define girname	%mklibname signon-glib-gir %{api}
 %define devname	%mklibname -d signon-glib
+%define debug_package %nil
 
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
