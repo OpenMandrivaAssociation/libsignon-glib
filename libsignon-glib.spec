@@ -71,7 +71,7 @@ Python binding for %{name}.
 sed -i 's!-Werror!!g' libsignon-glib/Makefile.am
 ./autogen.sh
 %configure
-make
+%make -j1
 
 %install
 %makeinstall_std
