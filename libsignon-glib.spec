@@ -8,7 +8,7 @@
 
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
-Version:	1.12
+Version:	1.15
 Release:	1
 Group:		System/Libraries
 License:	LGPLv2
