@@ -64,7 +64,7 @@ Group:		Development/Python
 Python binding for %{name}.
 
 %prep
-%setup -qn %{name}-%{version}-11033f3e12b73064d9ff2df9ae8e2d3c1883f76e
+%setup -q
 
 %build
 %setup_compile_flags
