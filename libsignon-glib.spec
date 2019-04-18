@@ -24,7 +24,7 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.26
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0) >= 2.90
-BuildRequires:	pkgconfig(signond) >= 8.60
+BuildRequires:	pkgconfig(signond)
 
 %description
 libsignon-glib provides authorization and authentication management for GLib
