@@ -24,7 +24,7 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.26
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0) >= 2.90
-BuildRequires:	pkgconfig(signond) >= 8.40
+BuildRequires:	pkgconfig(signond) >= 8.60
 
 %description
 libsignon-glib provides authorization and authentication management for GLib
@@ -67,14 +67,12 @@ Python binding for %{name}.
 %setup -q
 
 %build
-%setup_compile_flags
-sed -i 's!-Werror!!g' libsignon-glib/Makefile.am
-./autogen.sh
-%configure
-%make_build -j1
+%meson
+%meson_build
 
 %install
-%make_install
+%meson_install
+
 rm -fr %{buildroot}%{_prefix}/doc
 rm -fr %{buildroot}%{py_platsitedir}/gi/overrides/__pycache__
 %files -n %{libname}
