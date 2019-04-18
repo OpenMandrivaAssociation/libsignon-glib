@@ -101,7 +101,7 @@ r%files -n %{libname}
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Signon-2.0.typelib
 
-%files -n %{develname}
+%files -n %{devname}
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 %{_includedir}/%{name}/
@@ -109,7 +109,7 @@ r%files -n %{libname}
 %{_datadir}/gtk-doc/html/%{name}
 %{_datadir}/vala/vapi/*
 
-%files -n python3-%{name}
+%files -n python-%{name}
 %{python_sitearch}/gi/overrides/Signon.*
 %{python_sitearch}/gi/overrides/__pycache__/*
 
