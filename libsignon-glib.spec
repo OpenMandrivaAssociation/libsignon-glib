@@ -92,7 +92,7 @@ popd
 %install
 %meson_install
 
-r%files -n %{libname}
+%files -n %{libname}
 %doc AUTHORS README.md NEWS
 %license COPYING
 %{_libdir}/%{name}.so.%{major}
