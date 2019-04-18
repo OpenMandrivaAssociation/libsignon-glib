@@ -8,8 +8,8 @@
 
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
-Version:	1.15
-Release:	2
+Version:	2.1
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
@@ -71,10 +71,10 @@ Python binding for %{name}.
 sed -i 's!-Werror!!g' libsignon-glib/Makefile.am
 ./autogen.sh
 %configure
-%make -j1
+%make_build -j1
 
 %install
-%makeinstall_std
+%make_install
 rm -fr %{buildroot}%{_prefix}/doc
 rm -fr %{buildroot}%{py_platsitedir}/gi/overrides/__pycache__
 %files -n %{libname}
