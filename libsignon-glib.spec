@@ -1,6 +1,6 @@
 %define api	1.0
 %define Werror_cflags %nil
-%define major	1
+%define major	2
 %define libname	%mklibname signon-glib %{major}
 %define girname	%mklibname signon-glib-gir %{api}
 %define devname	%mklibname -d signon-glib
@@ -8,15 +8,23 @@
 
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
-Version:	1.15
-Release:	2
+Version:	2.1
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
 Source0:	http://accounts-sso.googlecode.com/files/%{name}-%{version}.tar.gz
+# the shared dbus interfaces are maintained in a separate git submodule
+%define ifaces  signon-dbus-specification
+%define icommit 67487954653006ebd0743188342df65342dc8f9b
+Source1:       https://gitlab.com/accounts-sso/%{ifaces}/-/archive/%{icommit}/%{ifaces}-%{icommit}.tar.gz
+
 BuildRequires:	python-gi >= 2.90
+BuildRequires:  meson
 BuildRequires:	xsltproc
 BuildRequires:	gtk-doc
+BuildRequires:  vala
+BuildRequires:  xsltproc
 BuildRequires:	pkgconfig(check) >= 0.9.4
 BuildRequires:	pkgconfig(gio-2.0) >= 2.30
 BuildRequires:	pkgconfig(gio-unix-2.0)
@@ -24,7 +32,10 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.26
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0) >= 2.90
-BuildRequires:	pkgconfig(signond) >= 8.40
+BuildRequires:	pkgconfig(signond)
+BuildRequires:  pkgconfig(vapigen)
+BuildRequires:  pkgconfig(python)
+BuildRequires:  python3dist(pygobject)
 
 %description
 libsignon-glib provides authorization and authentication management for GLib
@@ -64,33 +75,41 @@ Group:		Development/Python
 Python binding for %{name}.
 
 %prep
-%setup -q
+%autosetup -n %{name}-%{version} -p1
+
+# initialise git submodule manually
+pushd libsignon-glib/interfaces
+tar -xzf %{SOURCE1}
+mv %{ifaces}-%{icommit}/* ./
+rmdir %{ifaces}-%{icommit}
+popd
+
 
 %build
-%setup_compile_flags
-sed -i 's!-Werror!!g' libsignon-glib/Makefile.am
-./autogen.sh
-%configure
-%make -j1
+%meson
+%meson_build
 
 %install
-%makeinstall_std
-rm -fr %{buildroot}%{_prefix}/doc
-rm -fr %{buildroot}%{py_platsitedir}/gi/overrides/__pycache__
+%meson_install
+
 %files -n %{libname}
-%{_libdir}/%{name}.so.%{major}*
+%doc AUTHORS README.md NEWS
+%license COPYING
+%{_libdir}/%{name}.so.%{major}
+%{_libdir}/%{name}.so.%{major}.*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Signon-%{api}.typelib
+%{_libdir}/girepository-1.0/Signon-2.0.typelib
 
 %files -n %{devname}
-%doc COPYING AUTHORS
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
-%{_includedir}/%{name}
-%{_datadir}/gir-1.0/Signon-%{api}.gir
+%{_includedir}/%{name}/
+%{_datadir}/gir-1.0/Signon-2.0.gir
+%{_datadir}/gtk-doc/html/%{name}
 %{_datadir}/vala/vapi/*
 
 %files -n python-%{name}
-%py_platsitedir/gi/overrides/Signon.*
+%{python_sitearch}/gi/overrides/Signon.*
+%{python_sitearch}/gi/overrides/__pycache__/*
 
