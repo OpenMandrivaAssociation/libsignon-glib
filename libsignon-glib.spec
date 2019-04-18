@@ -1,6 +1,6 @@
 %define api	1.0
 %define Werror_cflags %nil
-%define major	1
+%define major	2
 %define libname	%mklibname signon-glib %{major}
 %define girname	%mklibname signon-glib-gir %{api}
 %define devname	%mklibname -d signon-glib
@@ -25,6 +25,8 @@ BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0) >= 2.90
 BuildRequires:	pkgconfig(signond)
+BuildRequires: pkgconfig(vapigen)
+BuildRequires: pkgconfig(python)
 
 %description
 libsignon-glib provides authorization and authentication management for GLib
