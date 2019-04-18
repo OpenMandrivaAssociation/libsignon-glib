@@ -15,6 +15,7 @@ License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
 Source0:	http://accounts-sso.googlecode.com/files/%{name}-%{version}.tar.gz
 BuildRequires:	python-gi >= 2.90
+BuildRequires:  meson
 BuildRequires:	xsltproc
 BuildRequires:	gtk-doc
 BuildRequires:	pkgconfig(check) >= 0.9.4
