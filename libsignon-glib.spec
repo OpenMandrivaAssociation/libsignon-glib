@@ -9,7 +9,7 @@
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
 Version:	2.1
-Release:	2
+Release:	3
 Group:		System/Libraries
 License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
@@ -34,7 +34,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(signond)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(python)
-BuildRequires:	python3egg(pygobject)
+BuildRequires:	python3dist(pygobject)
 
 %description
 libsignon-glib provides authorization and authentication management for GLib
@@ -70,7 +70,7 @@ developing applications that use %{name}.
 %package -n python-%{name}
 Summary:	Python binding for %{name}
 Group:		Development/Python
-Requires:	python3egg(pygobject)
+Requires:	python3dist(pygobject)
 
 %description -n python-%{name}
 Python binding for %{name}.
