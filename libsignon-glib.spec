@@ -1,9 +1,9 @@
-%define api	1.0
+%define api 1.0
 %define Werror_cflags %nil
-%define major	2
-%define libname	%mklibname signon-glib %{major}
-%define girname	%mklibname signon-glib-gir %{api}
-%define devname	%mklibname -d signon-glib
+%define major 2
+%define libname %mklibname signon-glib %{major}
+%define girname %mklibname signon-glib-gir %{api}
+%define devname %mklibname -d signon-glib
 %define debug_package %nil
 
 Summary:	Authorization and authentication management for glib
@@ -19,23 +19,22 @@ Source0:	http://accounts-sso.googlecode.com/files/%{name}-%{version}.tar.gz
 %define icommit 67487954653006ebd0743188342df65342dc8f9b
 Source1:       https://gitlab.com/accounts-sso/%{ifaces}/-/archive/%{icommit}/%{ifaces}-%{icommit}.tar.gz
 
-BuildRequires:	python-gi >= 2.90
-BuildRequires:  meson
+BuildRequires:	meson
+BuildRequires:	ninja
 BuildRequires:	xsltproc
 BuildRequires:	gtk-doc
-BuildRequires:  vala
-BuildRequires:  xsltproc
+BuildRequires:	vala
+BuildRequires:	xsltproc
 BuildRequires:	pkgconfig(check) >= 0.9.4
 BuildRequires:	pkgconfig(gio-2.0) >= 2.30
 BuildRequires:	pkgconfig(gio-unix-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.26
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-BuildRequires:	pkgconfig(pygobject-3.0) >= 2.90
 BuildRequires:	pkgconfig(signond)
-BuildRequires:  pkgconfig(vapigen)
-BuildRequires:  pkgconfig(python)
-BuildRequires:  python3dist(pygobject)
+BuildRequires:	pkgconfig(vapigen)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	python3egg(pygobject)
 
 %description
 libsignon-glib provides authorization and authentication management for GLib
@@ -62,6 +61,7 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Requires:	pkgconfig(dbus-glib-1)
 
 %description -n %{devname}
 The %{name}-devel package contains libraries and header files for
@@ -70,6 +70,7 @@ developing applications that use %{name}.
 %package -n python-%{name}
 Summary:	Python binding for %{name}
 Group:		Development/Python
+Requires:	python3egg(pygobject)
 
 %description -n python-%{name}
 Python binding for %{name}.
@@ -78,12 +79,11 @@ Python binding for %{name}.
 %autosetup -n %{name}-%{version} -p1
 
 # initialise git submodule manually
-pushd libsignon-glib/interfaces
+cd libsignon-glib/interfaces
 tar -xzf %{SOURCE1}
 mv %{ifaces}-%{icommit}/* ./
 rmdir %{ifaces}-%{icommit}
-popd
-
+cd ..
 
 %build
 %meson
