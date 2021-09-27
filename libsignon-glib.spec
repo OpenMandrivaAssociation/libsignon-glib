@@ -4,12 +4,12 @@
 %define libname %mklibname signon-glib %{major}
 %define girname %mklibname signon-glib-gir %{api}
 %define devname %mklibname -d signon-glib
-%define debug_package %nil
+%define _empty_manifest_terminate_build 0
 
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
 Version:	2.1
-Release:	5
+Release:	6
 Group:		System/Libraries
 License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
