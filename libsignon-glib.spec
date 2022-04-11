@@ -9,7 +9,7 @@
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
 Version:	2.1
-Release:	6
+Release:	7
 Group:		System/Libraries
 License:	LGPLv2
 Url:		http://code.google.com/p/accounts-sso/
@@ -111,5 +111,3 @@ cd ..
 
 %files -n python-%{name}
 %{python_sitearch}/gi/overrides/Signon.*
-%{python_sitearch}/gi/overrides/__pycache__/*
-
