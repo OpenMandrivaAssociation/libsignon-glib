@@ -9,11 +9,11 @@
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
 Version:	2.1
-Release:	11
+Release:	12
 Group:		System/Libraries
 License:	LGPLv2
-Url:		http://code.google.com/p/accounts-sso/
-Source0:	http://accounts-sso.googlecode.com/files/%{name}-%{version}.tar.gz
+Url:		https://code.google.com/p/accounts-sso/
+Source0:	https://accounts-sso.googlecode.com/files/%{name}-%{version}.tar.gz
 # the shared dbus interfaces are maintained in a separate git submodule
 %define ifaces  signon-dbus-specification
 %define icommit 67487954653006ebd0743188342df65342dc8f9b
