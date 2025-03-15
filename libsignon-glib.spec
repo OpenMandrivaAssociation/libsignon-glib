@@ -9,7 +9,7 @@
 Summary:	Authorization and authentication management for glib
 Name:		libsignon-glib
 Version:	2.1
-Release:	12
+Release:	14
 Group:		System/Libraries
 License:	LGPLv2
 Url:		https://code.google.com/p/accounts-sso/
